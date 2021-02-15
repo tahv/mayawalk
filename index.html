@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mayawalk &#8212; mayawalk  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-mayawalk">
+<span id="mayawalk"></span><h1>mayawalk<a class="headerlink" href="#module-mayawalk" title="Permalink to this headline">¶</a></h1>
+<p>Collection of traversal algorithms for Autodesk Maya.</p>
+<p><a class="reference external" href="https://github.com/tahv/mayawalk">Github</a></p>
+<div class="section" id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>Nodes functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.parent" title="mayawalk.parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.parent</span></code></a></p></td>
+<td><p>Return the parent of <code class="docutils literal notranslate"><span class="pre">node</span></code>, if it has one, None otherwise.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mayawalk.children" title="mayawalk.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.children</span></code></a></p></td>
+<td><p>Make an iterator returning children of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.siblings" title="mayawalk.siblings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.siblings</span></code></a></p></td>
+<td><p>Make an iterator returning siblings of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mayawalk.hierarchy" title="mayawalk.hierarchy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.hierarchy</span></code></a></p></td>
+<td><p>Traverse <code class="docutils literal notranslate"><span class="pre">root</span></code> hierarchy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.top_nodes" title="mayawalk.top_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.top_nodes</span></code></a></p></td>
+<td><p>Make an iterator returning the topmost nodes in <code class="docutils literal notranslate"><span class="pre">nodes</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mayawalk.connections" title="mayawalk.connections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.connections</span></code></a></p></td>
+<td><p>Traverse <code class="docutils literal notranslate"><span class="pre">root</span></code> connections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.connected" title="mayawalk.connected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.connected</span></code></a></p></td>
+<td><p>Make an iterator returning nodes connected <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Plugs functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.plugs" title="mayawalk.plugs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.plugs</span></code></a></p></td>
+<td><p>Make an iterator returning plugs of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mayawalk.plug_parent" title="mayawalk.plug_parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.plug_parent</span></code></a></p></td>
+<td><p>Return <code class="docutils literal notranslate"><span class="pre">plug</span></code> parent, if it has one, None otherwise.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.plug_children" title="mayawalk.plug_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.plug_children</span></code></a></p></td>
+<td><p>Make an iterator returning children plugs of <code class="docutils literal notranslate"><span class="pre">plug</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mayawalk.plug_has_source" title="mayawalk.plug_has_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.plug_has_source</span></code></a></p></td>
+<td><p>Return True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has any source connection, False otherwise.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.plug_has_destinations" title="mayawalk.plug_has_destinations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.plug_has_destinations</span></code></a></p></td>
+<td><p>Return True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has any destination connection, False otherwise.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mayawalk.plug_has_connections" title="mayawalk.plug_has_connections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.plug_has_connections</span></code></a></p></td>
+<td><p>Return True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has any source or destination connection.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Enums</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mayawalk.ConnectionStatus" title="mayawalk.ConnectionStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mayawalk.ConnectionStatus</span></code></a></p></td>
+<td><p>All connections status a plug can have.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="nodes-functions">
+<h2>Nodes functions<a class="headerlink" href="#nodes-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="mayawalk.parent">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">parent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_world</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the parent of <code class="docutils literal notranslate"><span class="pre">node</span></code>, if it has one, None otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>MObject</em>) – Dag node we want the parent of.</p></li>
+<li><p><strong>include_world</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If parent is the world node, return it if True,
+return None if False. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>MObject, None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>        <span class="c1"># root</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">child</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span> <span class="c1"># |- child</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parent</span><span class="p">(</span><span class="n">child</span><span class="p">)</span> <span class="o">==</span> <span class="n">root</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parent</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">==</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.children">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">children</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.children" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an iterator returning children of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>MObject</em>) – Dag node we want the children of.</p></li>
+<li><p><strong>api_type</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Only yields nodes of specified <em>Mfn</em> constant
+type. Defaults to None (same as filtering by <em>MFn.kDagNode</em>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MObject</em> – children of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>         <span class="c1"># root</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;nurbsCurve&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span> <span class="c1"># |- shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>  <span class="c1"># |- group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">children</span><span class="p">(</span><span class="n">root</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">shape</span><span class="p">,</span> <span class="n">group</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">children</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">api_type</span><span class="o">=</span><span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFn</span><span class="o">.</span><span class="n">kNurbsCurve</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">shape</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.siblings">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">siblings</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.siblings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an iterator returning siblings of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>MObject</em>) – Dag node we want the siblings of.</p></li>
+<li><p><strong>api_type</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Only yields nodes of specified <em>Mfn</em> constant
+type. Defaults to None (same as filtering by <em>MFn.kDagNode</em>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MObject</em> – Nodes at the same hierarchical level (same parent) than
+<code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>        <span class="c1"># root</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>  <span class="c1"># |- node</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span> <span class="c1"># |- group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">joint</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;joint&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>     <span class="c1"># |- joint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">siblings</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">api_type</span><span class="o">=</span><span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFn</span><span class="o">.</span><span class="n">kJoint</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">joint</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">siblings</span><span class="p">(</span><span class="n">node</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="n">joint</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.hierarchy">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">hierarchy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoppers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upstream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.hierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverse <code class="docutils literal notranslate"><span class="pre">root</span></code> hierarchy.</p>
+<dl class="simple">
+<dt>Info:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">root</span></code> is included as the first element in the returned iterator.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>MObject</em>) – Starting dag node.</p></li>
+<li><p><strong>stoppers</strong> (<em>list</em><em>[</em><em>MObject</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Don’t iterate past these nodes. They
+are still yielded and won’t break the iteration. Defaults to None.</p></li>
+<li><p><strong>api_type</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Only yields nodes of specified <em>Mfn</em> constant
+type. Defaults to None (same as filtering by <em>MFn.kDagNode</em>).</p></li>
+<li><p><strong>depth_first</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Traversal algorithm.
+Use <em>depth-first search</em> if True, <em>breadth-first search</em> if False.
+Defaults to False.</p></li>
+<li><p><strong>downstream</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Traversal direction.
+Go <em>upstream</em> (parents) if True, <em>downstream</em> (children) if False.
+The <code class="docutils literal notranslate"><span class="pre">depth_first</span></code> param has no effect when going upstream.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MObject</em> – Nodes in <code class="docutils literal notranslate"><span class="pre">root</span></code> (<strong>included</strong>) hierarchy.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>           <span class="c1"># root</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_a</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>   <span class="c1"># |- node_a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;nurbsCurve&#39;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span> <span class="c1">#    |- shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_b</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;joint&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>       <span class="c1"># |- node_b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">(</span><span class="n">root</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">shape</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">upstream</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">shape</span><span class="p">,</span> <span class="n">node_a</span><span class="p">,</span> <span class="n">root</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.top_nodes">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">top_nodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.top_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an iterator returning the topmost nodes in <code class="docutils literal notranslate"><span class="pre">nodes</span></code>.</p>
+<p>A top node is a node whose parent(s) is not in the input <code class="docutils literal notranslate"><span class="pre">nodes</span></code> list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes</strong> (<em>list</em><em>[</em><em>MObject</em><em>]</em>) – A list of dag nodes objects.</p></li>
+<li><p><strong>sparse</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If you want to find the top nodes in a sparse hierarchy.
+If <strong>False</strong>, only check the first parent of each node against
+<code class="docutils literal notranslate"><span class="pre">nodes</span></code>.
+If <strong>True</strong>, check all parents in the upstream hierarchy of each
+nodes against <code class="docutils literal notranslate"><span class="pre">nodes</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MObject</em> – Members of <code class="docutils literal notranslate"><span class="pre">nodes</span></code> list whose parent is not in <code class="docutils literal notranslate"><span class="pre">nodes</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_a</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>          <span class="c1"># node_a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_b</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">node_a</span><span class="p">)</span>  <span class="c1"># |- node_b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_c</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span> <span class="n">node_b</span><span class="p">)</span>  <span class="c1">#    |- node_c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">top_nodes</span><span class="p">([</span><span class="n">node_b</span><span class="p">,</span> <span class="n">node_c</span><span class="p">]))</span> <span class="o">==</span> <span class="p">[</span><span class="n">node_b</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">top_nodes</span><span class="p">([</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_c</span><span class="p">],</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">node_a</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.connections">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">connections</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoppers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upstream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverse <code class="docutils literal notranslate"><span class="pre">root</span></code> connections.</p>
+<dl class="simple">
+<dt>Info:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">root</span></code> is included as the first element in the returned iterator.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>MObject</em>) – Starting dependency node.</p></li>
+<li><p><strong>stoppers</strong> (<em>list</em><em>[</em><em>MObject</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Don’t iterate past these nodes. They
+are still yielded and won’t break the iteration. Defaults to None.</p></li>
+<li><p><strong>api_type</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – Only yields nodes of specified Mfn constant type.
+Defaults to None (same as filtering by MFn.kDagNode).</p></li>
+<li><p><strong>depth_first</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Traversal algorithm.
+Use <em>depth-first search</em> if True, <em>breadth-first search</em> if False.
+Defaults to False.</p></li>
+<li><p><strong>downstream</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Traversal direction.
+Go <em>upstream</em> (sources, left) if True,
+<em>downstream</em> (destinations, right) if False.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MObject</em> – Nodes connected directly and indirectly to <code class="docutils literal notranslate"><span class="pre">root</span></code>
+(<strong>included</strong>).</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_a</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_b</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node_c</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plug_a</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">node_a</span><span class="p">)</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;tx&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plug_b</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">node_b</span><span class="p">)</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;tx&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plug_c</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">node_c</span><span class="p">)</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;tx&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">plug_a</span><span class="p">,</span> <span class="n">plug_b</span><span class="p">)</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">plug_b</span><span class="p">,</span> <span class="n">plug_c</span><span class="p">)</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># node_a.tx &gt;&gt; node_b.tx &gt;&gt; node_c.tx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">connections</span><span class="p">(</span><span class="n">node_a</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">node_c</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">connections</span><span class="p">(</span><span class="n">node_c</span><span class="p">,</span> <span class="n">upstream</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">node_c</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">node_a</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">connections</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">stoppers</span><span class="o">=</span><span class="p">[</span><span class="n">node_b</span><span class="p">]))</span> <span class="o">==</span> <span class="p">[</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.connected">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">connected</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an iterator returning nodes connected <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>MObject</em>) – Node to find the connections of.</p></li>
+<li><p><strong>sources</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Include <code class="docutils literal notranslate"><span class="pre">node</span></code> sources. Defaults to True.</p></li>
+<li><p><strong>destinations</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Include <code class="docutils literal notranslate"><span class="pre">node</span></code> destinations. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MObject</em> – Nodes directly connected to <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">src</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">src</span><span class="p">)</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;tx&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;tx&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># src.tx &gt;&gt; dst.tx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">connected</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">destinations</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">dst</span><span class="p">]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">connected</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">destinations</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="n">src</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="plugs-functions">
+<h2>Plugs functions<a class="headerlink" href="#plugs-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="mayawalk.plugs">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">plugs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.plugs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an iterator returning plugs of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>MObject</em>) – Node we want the plugs of.</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2.7/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – If specified, only yields nodes of this
+<a class="reference internal" href="#mayawalk.ConnectionStatus" title="mayawalk.ConnectionStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectionStatus</span></code></a>. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MPlug</em> – Plugs of <code class="docutils literal notranslate"><span class="pre">node</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.plug_parent">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">plug_parent</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plug</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.plug_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">plug</span></code> parent, if it has one, None otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>plug</strong> (<em>MPlug</em>) – Plug we want the parent of.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>MPlug, None</em></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">translate</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;translate&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">translate_x</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;translateX&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plug_parent</span><span class="p">(</span><span class="n">translate</span><span class="p">)</span> <span class="o">==</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plug_parent</span><span class="p">(</span><span class="n">translate_x</span><span class="p">)</span> <span class="o">==</span> <span class="n">translate</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.plug_children">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">plug_children</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">physical_indexes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.plug_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an iterator returning children plugs of <code class="docutils literal notranslate"><span class="pre">plug</span></code>.</p>
+<p>Iterator might be empty if <code class="docutils literal notranslate"><span class="pre">plug</span></code> is neither an array nor a compound, or
+is a non-physical plug (for example <em>animCurveUU.keyTanOutX</em>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plug</strong> (<em>MPlug</em>) – The plug we want chilren of.</p></li>
+<li><p><strong>physical_indexes</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">mplug</span></code> is an array, return the physical
+indexes if <strong>True</strong>, the logical indexes if <strong>False</strong>.
+Default to False.</p></li>
+<li><p><strong>reverse</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Iter children
+in the correct order if <strong>False</strong> (<code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">Y,</span> <span class="pre">Z</span> <span class="pre">or</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">2</span></code>)
+or in reverse order if <strong>True</strong> (<code class="docutils literal notranslate"><span class="pre">Z,</span> <span class="pre">Y,</span> <span class="pre">X</span> <span class="pre">or</span> <span class="pre">2,</span> <span class="pre">1,</span> <span class="pre">0</span></code>).
+Default to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>MPlug</em> – Children mplugs of <code class="docutils literal notranslate"><span class="pre">plug</span></code></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>IndexError</strong> – Unknown error when trying to get a child plug.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MDagModifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">OpenMaya</span><span class="o">.</span><span class="n">MFnDagNode</span><span class="p">(</span><span class="n">modifier</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;transform&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modifier</span> <span class="o">=</span> <span class="n">modifier</span><span class="o">.</span><span class="n">doIt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">translate</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">findPlug</span><span class="p">(</span><span class="s1">&#39;t&#39;</span> <span class="o">+</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="s1">&#39;xyz&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">plug_children</span><span class="p">(</span><span class="n">translate</span><span class="p">))</span> <span class="o">==</span> <span class="n">children</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">children</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">plug_children</span><span class="p">(</span><span class="n">translate</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">==</span> <span class="n">children</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.plug_has_source">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">plug_has_source</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.plug_has_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has any source connection, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nested</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If True, extend the check to all children in <code class="docutils literal notranslate"><span class="pre">plug</span></code>
+hierarchy.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.plug_has_destinations">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">plug_has_destinations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.plug_has_destinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has any destination connection, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nested</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If True, extend the check to all children in <code class="docutils literal notranslate"><span class="pre">plug</span></code>
+hierarchy.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="py function">
+<dt id="mayawalk.plug_has_connections">
+<code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">plug_has_connections</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.plug_has_connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has any source or destination connection.</p>
+<p>Convenience function that run both <a class="reference internal" href="#mayawalk.plug_has_source" title="mayawalk.plug_has_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plug_has_source</span></code></a> and
+<a class="reference internal" href="#mayawalk.plug_has_destinations" title="mayawalk.plug_has_destinations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plug_has_destinations</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nested</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – If True, extend the check to all children in <code class="docutils literal notranslate"><span class="pre">plug</span></code>
+hierarchy.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="enums">
+<h2>Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mayawalk.ConnectionStatus">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">mayawalk.</span></code><code class="sig-name descname"><span class="pre">ConnectionStatus</span></code><a class="headerlink" href="#mayawalk.ConnectionStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>All connections status a plug can have. Enum class.</p>
+<dl class="py method">
+<dt id="mayawalk.ConnectionStatus.has_status">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">has_status</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mayawalk.ConnectionStatus.has_status" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plug</strong> (<em>MPlug</em>) – Plug to check.</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – <a class="reference internal" href="#mayawalk.ConnectionStatus" title="mayawalk.ConnectionStatus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectionStatus</span></code></a> constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><em>bool</em> – True if <code class="docutils literal notranslate"><span class="pre">plug</span></code> has <code class="docutils literal notranslate"><span class="pre">connection</span></code> status, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mayawalk.ConnectionStatus.kConnected">
+<code class="sig-name descname"><span class="pre">kConnected</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#mayawalk.ConnectionStatus.kConnected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has any connection.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mayawalk.ConnectionStatus.kConnectedDestinations">
+<code class="sig-name descname"><span class="pre">kConnectedDestinations</span></code><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#mayawalk.ConnectionStatus.kConnectedDestinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has destination(s) / is a source.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mayawalk.ConnectionStatus.kConnectedSources">
+<code class="sig-name descname"><span class="pre">kConnectedSources</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#mayawalk.ConnectionStatus.kConnectedSources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has a source / is a destination.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mayawalk.ConnectionStatus.kDisconnected">
+<code class="sig-name descname"><span class="pre">kDisconnected</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#mayawalk.ConnectionStatus.kDisconnected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has no connection.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mayawalk.ConnectionStatus.kDisconnectedDestinations">
+<code class="sig-name descname"><span class="pre">kDisconnectedDestinations</span></code><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#mayawalk.ConnectionStatus.kDisconnectedDestinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has no destinations / is not a source.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mayawalk.ConnectionStatus.kDisconnectedSources">
+<code class="sig-name descname"><span class="pre">kDisconnectedSources</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#mayawalk.ConnectionStatus.kDisconnectedSources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has no source / is not a destination.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Thibaud Gambier.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
