@@ -1,0 +1,5 @@
+*.pyc
+/venv
+.pytest_cache/
+docs/build
+docs/source/stubs
